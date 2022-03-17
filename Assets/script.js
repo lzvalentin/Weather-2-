@@ -52,4 +52,38 @@ function searchWeatherData(e){
     }else {
         search= searchField.val();
     }
-    if (!recentSearches.includes(search)){recentSearches}
+    if (!recentSearches.includes(search)){
+        recentSearches.unshift(search);
+    } else {
+        let index= recentSearches.indexOf(search);
+        recentSearches.splice(index, 1);
+        recentSearches.unshift(search);
+    }
+    
+    // call to update, local storage
+    updateSearchList();
+    const url=`https://api.openweathermap.org/data/2.5/weather?q=${search}&units=imperial&appid=${APIKey}`;
+
+    fetch(url)
+    .then(function (res){
+        return res.json();
+    }).then (function(data){
+        cityWeatherData.cityName=data.name;
+        cityWeatherData.cityLat = data.coord.lat;
+        cityWeatherData.cityLong = data.coord.lon;
+        getWeather();
+    }).catch(function(err){
+        return;
+    });
+}
+
+function getWeather(){
+    const urlCord = `https://api.openweathermap.org/data/2.5/onecall?lat=${cityWeatherData.cityLat}&lon=${cityWeatherData.cityLong}&exclude=minutely,hourly,alerts&units=imperial&appid=${APIKey}` 
+
+fetch(urlCord)
+    .then(function (res){
+        return res.json();
+    }).then (function (data){
+        
+    })
+}
