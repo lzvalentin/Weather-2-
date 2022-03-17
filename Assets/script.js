@@ -1,5 +1,5 @@
 let APIKey = '928c5ba094c06154ca53619a766d8d60';
-let seachBtn = $('#searchButton');
+let searchBtn = $('#searchButton');
 let searchField = $('#searchInput');
 let searchHistoryList = $('#search-history');
 let recentSearches = [];
@@ -96,7 +96,7 @@ function getWeather() {
 
     for (var i = 0; i < 5; i++) {
             cityWeatherData.fiveDayForcast[i].date = (moment.unix(data.daily[i + 1].dt + (data.timezone_offset))).utc().format("M/D/YY");
-            cityWeatherData.fiveDayForcast[i].imgURL = `http://openweathermap.org/img/wn/${data2.daily[i + 1].weather[0].icon}@2x.png`;
+            cityWeatherData.fiveDayForcast[i].imgURL = `http://openweathermap.org/img/wn/${data.daily[i + 1].weather[0].icon}@2x.png`;
             cityWeatherData.fiveDayForcast[i].temp = Math.floor(data.daily[i + 1].temp.day);
             cityWeatherData.fiveDayForcast[i].humidity = Math.floor(data.daily[i + 1].humidity);
 
@@ -142,18 +142,20 @@ function updateCards() {
             `<p class="card-text">Temp: ${cityWeatherData.fiveDayForcast[j].temp}&#730F</p>` +
             `<p class="card-text">Humidity: ${cityWeatherData.fiveDayForcast[j].humidity}%</p></div></div>`);
     }
+    // event handler for the search button click
+
 }
-
-
 // event handler for the search button click
-searchBtn.on('click', function (e) {
+searchBtn.on('click', function(e) {
     e.preventDefault();
 
     if (searchField.val() === "") {
         return;
     }
-} searchWeatherData(e);
+searchWeatherData(e);
 });
+
+
 
 $('#city-search-form').on("submit", function (e) {
     e.preventDefault();
