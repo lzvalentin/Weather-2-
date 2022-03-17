@@ -8,7 +8,6 @@ Deployed Site: https://lzvalentin.github.io/Weather-2-/
 Repo: https://github.com/lzvalentin/Weather-2-
 
 ## Table of Contents 
- * [Installation](#installation)
  * [User Story](#userstory)
  * [Usage](#usage)
  * [License](#license)
